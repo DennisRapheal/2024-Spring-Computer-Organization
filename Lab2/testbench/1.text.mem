@@ -1,0 +1,9 @@
+3c 08 10 00  // [00400000] lui $8, 4096                    ; 12: lui $t0, 0x1000                 # Load upper immediate to set upper 16 bits of $t0 to 0x1000
+8d 09 00 00  // [00400004] lw $9, 0($8)                    ; 13: lw $t1, 0($t0)                  # Load word from memory at address $t0 into $t1
+35 2a 00 ff  // [00400008] ori $10, $9, 255                ; 14: ori $t2, $t1, 0xFF              # Bitwise OR immediate to set $t2 with value of $t1 OR 0xFF
+01 2a 58 2a  // [0040000c] slt $11, $9, $10                ; 15: slt $t3, $t1, $t2               # Set less than to compare $t1 and $t2, result stored in $t3
+08 10 00 05  // [00400010] j 0x00400014 [loop]             ; 16: j loop                          # Jump to the loop label
+8d 0c 00 04  // [00400014] lw $12, 4($8)                   ; 19: lw $t4, 4($t0)                  # Load word from memory at address $t0 + 4 into $t4
+ad 0c 00 08  // [00400018] sw $12, 8($8)                   ; 20: sw $t4, 8($t0)                  # Store word from $t4 into memory at address $t0 + 8
+00 1c 78 25  // [0040001c] or $15, $0, $28                 ; 21: or $t7, $zero, $gp           # should not execute
+8f 8e 00 00  // [00400020] lw $14, 0($28)                  ; 22: lw $t6, 0($gp)               # should not execute
